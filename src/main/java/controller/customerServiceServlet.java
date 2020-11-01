@@ -27,6 +27,9 @@ public class customerServiceServlet extends HttpServlet {
             case "create":
                 addNewCustomer(request, response);
                 break;
+            case "edit":
+                updateCustomer(request,response);
+                break;
             default:
                 break;
         }
@@ -88,5 +91,20 @@ public class customerServiceServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("edit.jsp");
         request.setAttribute("customer",editedCustomer);
         dispatcher.forward(request,response);
+    }
+
+    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        int age = Integer.parseInt(request.getParameter("age"));
+        boolean isMale = false;
+        customer editedCustomer = new customer(id,name,address,age,isMale);
+        for (customer customerObj:customerServiceObj.findAll() ) {
+            if(customerObj.getId()==id)
+                customerObj = editedCustomer;
+        }
+        customerServiceObj.update(id,editedCustomer);
+        displayList(request,response);
     }
 }

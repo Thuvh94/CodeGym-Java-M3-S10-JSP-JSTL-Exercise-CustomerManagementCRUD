@@ -36,7 +36,7 @@
             </c:if>
             <tr>
                 <td>Gender: </td>
-                <td><input type="text" name="gender" id="gender" value="${gender}"></td>
+                <td><input type="text" name="gender" id="gender" value="${gender}">Male</td>
             </tr>
             <tr>
                 <td></td>
