@@ -36,7 +36,7 @@
             </c:if>
             <tr>
                 <td>Gender: </td>
-                <td><input type="text" name="gender" id="gender" value="${gender}">Male</td>
+                <td><input type="text" name="gender" id="gender" value="${gender}"></td>
             </tr>
             <tr>
                 <td></td>
@@ -46,7 +46,7 @@
     </fieldset>
 </form>
 <p>
-    <a href="/customers">Back to customer list</a>
+    <a href="/customerList">Back to customer list</a>
 </p>
 </body>
 </html>

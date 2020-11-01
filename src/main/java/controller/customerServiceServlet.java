@@ -47,6 +47,9 @@ public class customerServiceServlet extends HttpServlet {
             case "edit":
                 showEditFrom(request, response);
                 break;
+            case "delete":
+                showDeleteForm(request,response);
+                break;
             default:
                 displayList(request, response);
                 break;
@@ -106,5 +109,18 @@ public class customerServiceServlet extends HttpServlet {
         }
         customerServiceObj.update(id,editedCustomer);
         displayList(request,response);
+    }
+
+    //delete function
+    private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        customer deletedCustomer = new customer();
+        for (customer customerObj:customerServiceObj.findAll() ) {
+            if(customerObj.getId()==id)
+                deletedCustomer = customerObj;
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("delete.jsp");
+        request.setAttribute("customer",deletedCustomer);
+        dispatcher.forward(request,response);
     }
 }
