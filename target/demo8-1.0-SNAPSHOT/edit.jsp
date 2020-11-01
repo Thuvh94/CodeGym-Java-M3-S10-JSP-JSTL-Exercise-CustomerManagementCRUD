@@ -28,15 +28,23 @@
                 <td>Age: </td>
                 <td><input type="text" name="age" id="age" value="${requestScope["customer"].getAge()}"></td>
             </tr>
-            <c:if test="${customer.isMale()}">
-                <c:set var = "gender" value = "Male"/>
-            </c:if>
-            <c:if test="${!customer.isMale()}">
-                <c:set var = "gender" value = "Female"/>
-            </c:if>
+
             <tr>
                 <td>Gender: </td>
-                <td><input type="text" name="gender" id="gender" value="${gender}"></td>
+                <td>
+                    <c:if test="${customer.isMale()}">
+                        <label for="male">Male</label>
+                        <input type="radio" name="gender" id="male" value="${male}" checked="checked">
+                        <label for="male">Female</label>
+                        <input type="radio" name="gender" id="female" value="${female}">
+                    </c:if>
+                    <c:if test="${!customer.isMale()}">
+                        <label for="male">Male</label>
+                        <input type="radio" name="gender" id="male" value="${male}">
+                        <label for="male">Female</label>
+                        <input type="radio" name="gender" id="female" value="${female}" checked="checked">
+                    </c:if>
+                </td>
             </tr>
             <tr>
                 <td></td>

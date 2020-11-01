@@ -104,7 +104,11 @@ public class customerServiceServlet extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         int age = Integer.parseInt(request.getParameter("age"));
-        boolean isMale = false;
+        String gender = request.getParameter("gender");
+        boolean isMale;
+        if(gender.equals("male"))
+            isMale = true;
+        else  isMale = false;
         customer editedCustomer = new customer(id,name,address,age,isMale);
         for (customer customerObj:customerServiceObj.findAll() ) {
             if(customerObj.getId()==id)
