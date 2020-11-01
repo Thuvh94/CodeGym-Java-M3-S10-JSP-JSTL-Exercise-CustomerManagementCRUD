@@ -16,16 +16,36 @@ import java.util.List;
 
 @WebServlet(name = "customerServiceServlet",urlPatterns = "/customerList")
 public class customerServiceServlet extends HttpServlet {
+    customerServiceImpl customerServiceObj = new customerServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        customerServiceImpl customerServiceObj = new customerServiceImpl();
+        String action = request.getParameter("action");
+        if(action == null){
+            action = "";
+        }
+        switch (action){
+            case "create":
+                showCreateForm(request, response);
+                break;
+
+            default:
+                displayList(request, response);
+                break;
+        }
+    }
+
+    public void displayList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<customer> customers = customerServiceObj.findAll();
         request.setAttribute("customerList",customers);
         RequestDispatcher dispatcher = request.getRequestDispatcher("displayList.jsp");
+        dispatcher.forward(request,response);
+    }
+    public void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("addNew.jsp");
         dispatcher.forward(request,response);
     }
 }

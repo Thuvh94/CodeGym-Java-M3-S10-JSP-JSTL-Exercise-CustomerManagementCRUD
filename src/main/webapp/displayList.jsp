@@ -20,7 +20,7 @@
         <th>Name</th>
         <th>Address</th>
         <th>Age</th>
-        <th>Sex</th>
+        <th>Gender</th>
     </tr>
     <c:forEach items='${requestScope["customerList"]}' var="customer">
         <tr>
@@ -36,8 +36,13 @@
                     Female
                 </c:if>
             </td>
+            <td><a href="/customerList?action=edit&id=${customer.getId()}">Edit</a></td>
+            <td><a href="/customerList?action=delete&id=${customer.getId()}">Delete</a></td>
         </tr>
     </c:forEach>
+    <tr>
+        <td colspan="7"><a href="/customerList?action=create">Create new customer</a></td>
+    </tr>
 </table>
 </body>
 </html>
