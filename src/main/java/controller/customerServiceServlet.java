@@ -41,7 +41,9 @@ public class customerServiceServlet extends HttpServlet {
             case "create":
                 showCreateForm(request, response);
                 break;
-
+            case "edit":
+                showEditFrom(request, response);
+                break;
             default:
                 displayList(request, response);
                 break;
@@ -54,6 +56,7 @@ public class customerServiceServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("displayList.jsp");
         dispatcher.forward(request,response);
     }
+    // create function
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("addNew.jsp");
         dispatcher.forward(request,response);
@@ -73,5 +76,17 @@ public class customerServiceServlet extends HttpServlet {
         customer newCustomer = new customer(id,name,address,age,isMale);
         customerServiceObj.add(newCustomer);
         displayList(request,response);
+    }
+    //edit function
+    private void showEditFrom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        customer editedCustomer = new customer();
+        for (customer customerObj:customerServiceObj.findAll() ) {
+            if(customerObj.getId()==id)
+                editedCustomer = customerObj;
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("edit.jsp");
+        request.setAttribute("customer",editedCustomer);
+        dispatcher.forward(request,response);
     }
 }
