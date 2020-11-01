@@ -30,6 +30,9 @@ public class customerServiceServlet extends HttpServlet {
             case "edit":
                 updateCustomer(request,response);
                 break;
+            case "delete":
+                deleteCustomer(request,response);
+                break;
             default:
                 break;
         }
@@ -122,5 +125,11 @@ public class customerServiceServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("delete.jsp");
         request.setAttribute("customer",deletedCustomer);
         dispatcher.forward(request,response);
+    }
+
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        customerServiceObj.delete(id);
+        displayList(request,response);
     }
 }

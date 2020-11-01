@@ -12,6 +12,9 @@
     <title>Title</title>
 </head>
 <body>
-<c:out value="hello"></c:out>
+<c:out value="Hello"></c:out>
+<p>
+    <a href="/customerList">Go to customer list!</a>
+</p>
 </body>
 </html>
